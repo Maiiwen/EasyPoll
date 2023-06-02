@@ -1,72 +1,77 @@
 <template>
-    <div>
-        <!--        use bootstrap to generate choice inputs/checkboxes/radios -->
 
-        <div v-if="!expanded">
-            <select class="form-select" :multiple="multiple" v-model="selected">
-                <option value="0" selected>Open this select menu</option>
-                <option v-for="opt in options" :value="opt.id">{{ opt.libelle }}</option>
-            </select>
+    <Multiselect v-if="!expanded && multiple" mode="tags" v-model="selected" :options="optionList" :multiple="multiple" :searchable="true" placeholder="Choisissez une ou plusieurs options">
+                 ></Multiselect>
+    <select v-if="!expanded && !multiple" class="form-select" :multiple="multiple" :id="'quest' + id" v-model="selected">
+        <option selected disabled value="0" v-if="!multiple">Choisissez une option</option>
+        <option v-for="opt in options" :value="opt">{{ opt.libelle }}</option>
+    </select>
+    <div class="form-check" v-if="expanded">
+        <div v-for="option in options">
+            <input class="form-check-input" :type="multiple ? 'checkbox' : 'radio'" :id="'choice'+id+'_'+option.id"
+                   name="id"
+                   :value="option" v-model="selected">
+            <label class="form-check-label" :for="'choice'+id+'_'+option.id">
+                {{ option.libelle }}
+            </label>
         </div>
-        <div v-else>
-            <div class="form-check" v-if="multiple">
-                <div v-for="option in options">
-                    <input class="form-check-input" type="checkbox" :id="id+'_'+option.id" :value="option.id"  v-model="selected">
-                    <label class="form-check-label" :for="id+'_'+option.id">
-                        {{ option.libelle }}
-                    </label>
-                </div>
-            </div>
-            <div class="form-check" v-else>
-                <div v-for="option in options">
-                    <input class="form-check-input" type="radio" :id="id+'_'+option.id" name="id" :value="option.id" id="flexCheckDefault" v-model="selected">
-                    <label class="form-check-label" :for="id+'_'+option.id">
-                        {{ option.libelle }}
-                    </label>
-                </div>
-            </div>
-        </div>
-        {{ selected }}
     </div>
 </template>
 
 <script>
+import Multiselect from '@vueform/multiselect'
+
 export default {
     name: "ChoiceType",
-    props: {
-        options: {
-            type: Array,
-            default: () => []
-        },
-        expanded: {
-            type: Boolean,
-            default: false
-        },
-        multiple: {
-            type: Boolean,
-            default: false
-        },
-        id : {
-            type: String,
-            default: null
-        }
+    components: {
+        Multiselect,
     },
+    emits: ['update-question'],
+    props: {
+        question: {
+            type: Object,
+            default: null
+        },
+    },
+    computed:
+        {
+            id() {
+                return this.question.id
+            },
+            options() {
+                return this.question.answers
+            },
+            multiple() {
+                return this.question.multiple ?? false
+            },
+            expanded() {
+                return this.question.expanded ?? false
+            },
+            optionList() {
+                if (this.question.multiple) {
+                    return this.question.answers.map((el) => {
+                        el.value = {id: el.id, libelle: el.libelle};
+                        el.label = el.libelle;
+                        el.name = el.libelle;
+                        return el;
+                    })
+                }
+            }
+        },
     data() {
         return {
-            selected: []
+            selected: this.question.multiple ? [] : 0
         }
     },
     watch: {
         selected() {
-            this.$emit('input', this.selected)
+            this.$emit('update-question', {...this.question, selected: this.selected})
         }
     },
-    mounted() {
-        console.log(this.options)
-    }
+
 }
 </script>
 
 <style lang="scss" scoped>
-
+@import '@vueform/multiselect/themes/default.css';
 </style>

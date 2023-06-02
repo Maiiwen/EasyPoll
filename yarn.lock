@@ -1658,6 +1658,11 @@
     source-map "0.5.6"
     tsconfig "^7.0.0"
 
+"@vueform/multiselect@^2.6.2":
+  version "2.6.2"
+  resolved "https://registry.npmjs.org/@vueform/multiselect/-/multiselect-2.6.2.tgz"
+  integrity sha512-4BFvXyzyi0Pqi/lsYdGwONsQy+ypiVzuQbmoDUlttTxuoujFtf9AdeHi1ZhfIorXG9BiysK1HcQSfYB6USgwfQ==
+
 "@webassemblyjs/ast@^1.11.5", "@webassemblyjs/ast@1.11.5":
   version "1.11.5"
   resolved "https://registry.npmjs.org/@webassemblyjs/ast/-/ast-1.11.5.tgz"
@@ -2150,7 +2155,7 @@ bootstrap-icons@^1.10.5:
   resolved "https://registry.npmjs.org/bootstrap-icons/-/bootstrap-icons-1.10.5.tgz"
   integrity sha512-oSX26F37V7QV7NCE53PPEL45d7EGXmBgHG3pDpZvcRaKVzWMqIRL9wcqJUyEha1esFtM3NJzvmxFXDxjJYD0jQ==
 
-bootstrap@^5.2.3:
+bootstrap@^5.2.3, bootstrap@>=3.x.x:
   version "5.2.3"
   resolved "https://registry.npmjs.org/bootstrap/-/bootstrap-5.2.3.tgz"
   integrity sha512-cEKPM+fwb3cT8NzQZYEu4HilJ3anCrWqh3CHAok1p9jXqMPsPTBhU25fBckEJHJ/p+tTxTFTsFQGM+gaHpi3QQ==
@@ -5926,6 +5931,11 @@ vary@~1.1.2:
     chalk "^4.1.0"
     hash-sum "^2.0.0"
     watchpack "^2.4.0"
+
+vue-multiselect-bootstrap-theme@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.npmjs.org/vue-multiselect-bootstrap-theme/-/vue-multiselect-bootstrap-theme-1.0.7.tgz"
+  integrity sha512-0+GWbOr5IiHRBD6w2iwULP1rFv10Yexao3auq7vSh3ZUqf4JmS2LFkb9qOvvs0te2w/FwOEbdwf3xech7BXgVw==
 
 "vue@^2.6 || ^3.2.14", vue@^3.0, vue@^3.0.0-0, vue@3.2.47:
   version "3.2.47"
